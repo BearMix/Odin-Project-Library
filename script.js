@@ -1,7 +1,5 @@
-// Масив для зберігання книг
 let library = [];
 
-// Конструктор для об'єктів книги
 function Book(title, author, pages, isRead) {
   this.title = title;
   this.author = author;
@@ -9,16 +7,14 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
-// Додавання книги до бібліотеки
 function addBookToLibrary(book) {
   library.push(book);
   displayBooks();
 }
 
-// Відображення книг на сторінці
 function displayBooks() {
   const bookList = document.getElementById("book-list");
-  bookList.innerHTML = ""; // Очищення списку
+  bookList.innerHTML = "";
 
   library.forEach((book, index) => {
     const bookCard = document.createElement("div");
@@ -43,19 +39,16 @@ function displayBooks() {
   });
 }
 
-// Видалення книги з бібліотеки
 function removeBook(index) {
   library.splice(index, 1);
   displayBooks();
 }
 
-// Зміна статусу прочитаності книги
 function toggleReadStatus(index) {
   library[index].isRead = !library[index].isRead;
   displayBooks();
 }
 
-// Додавання подій до кнопок
 document.getElementById("new-book-btn").addEventListener("click", () => {
   document.getElementById("new-book-form").classList.remove("hidden");
   document.getElementById("form-container").classList.add("form-background");
@@ -64,12 +57,11 @@ document.getElementById("new-book-btn").addEventListener("click", () => {
 document.getElementById("cancel-btn").addEventListener("click", () => {
   document.getElementById("new-book-form").classList.add("hidden");
   document.getElementById("form-container").classList.remove("form-background");
-  document.getElementById("new-book-form").reset(); // Очищення форми
+  document.getElementById("new-book-form").reset();
 });
 
-// Обробка відправки форми
 document.getElementById("new-book-form").addEventListener("submit", (event) => {
-  event.preventDefault(); // Зупинити відправку форми на сервер
+  event.preventDefault();
 
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
@@ -79,12 +71,11 @@ document.getElementById("new-book-form").addEventListener("submit", (event) => {
   const newBook = new Book(title, author, pages, isRead);
   addBookToLibrary(newBook);
 
-  document.getElementById("new-book-form").classList.add("hidden"); // Приховати форму
+  document.getElementById("new-book-form").classList.add("hidden");
   document.getElementById("form-container").classList.remove("form-background");
-  document.getElementById("new-book-form").reset(); // Очистити форму
+  document.getElementById("new-book-form").reset();
 });
 
-// Додати кілька книг вручну для демонстрації
 addBookToLibrary(new Book("Game of Thrones", "George R. R. Martin", 694, true));
 addBookToLibrary(new Book("1984", " George Orwell", 328, true));
 addBookToLibrary(new Book("Harry Potter", "J.K. Rowling", 500, false));
